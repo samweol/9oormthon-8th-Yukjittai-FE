@@ -7,7 +7,7 @@ export default function useMapArray() {
     isLoading: false,
     isError: false,
   });
-  const keyword = useParams();
+  const { keyword } = useParams();
 
   useEffect(() => {
     try {
@@ -16,7 +16,6 @@ export default function useMapArray() {
 
       function placesSearchCB(data, status) {
         if (status === kakao.maps.services.Status.OK) {
-          console.log(data.slice(0, 5));
           setArrayInfo({
             isLoading: false,
             isError: false,
@@ -24,15 +23,15 @@ export default function useMapArray() {
           });
         }
       }
+
       setArrayInfo({ data, isLoading: true, isError: false });
       const ps = new kakao.maps.services.Places();
-      console.log(keyword);
 
-      ps.keywordSearch(keyword, placesSearchCB);
+      ps.keywordSearch(`제주도 ${keyword}`, placesSearchCB);
     } catch (error) {
       setArrayInfo({ isLoading: true, data, isError: true });
     }
-  }, [keyword]);
+  }, []);
 
   return {
     isLoading,
