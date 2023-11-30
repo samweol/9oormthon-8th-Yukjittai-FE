@@ -18,7 +18,7 @@ const ButtonStyle = styled.button`
 `;
 
 const FloatButtonStyle = styled.button`
-  position: absolute;
+  position: fixed;
   bottom: 50px;
   left: 50%;
   transform: translate(-50%);
