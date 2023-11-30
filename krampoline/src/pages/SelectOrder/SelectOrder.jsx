@@ -6,22 +6,17 @@ import LabelHeader from "../../components/Header/LabelHeader";
 import CheckButton from "../../components/CheckButton/CheckButton";
 import Button from "../../components/Button/Button";
 import axios from "axios";
+import Loading from "../../components/Loading/Loading";
 
 export default function SelectOrder() {
   const [orderList, setOrderList] = useState({
     distance: [],
     type: [],
   });
+  const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
 
-  console.log(location.state.searchData.location.x);
-  // location.state.searchData.standard : gps(내기준) || selectLocation(대안기준)
-  // selectionLocation (대안기준일때만 경도, 위도 보내줌)
-  // location.state.searchData.location.x : 경도
-  // location.state.searchData.location.y : 위도
-  // radius(반경) : 가까운 순으로 || 500m || 1km
-  // rate : 3점이상-리뷰100개이상 || 3점이하-리뷰100개이하
-  // type : 실내 || 테마 || 자연 || 야외
+  // console.log(location.state.searchData.location.x);
 
   const isButtonActive = Object.values(orderList).every((item) => item.length);
 
@@ -42,21 +37,6 @@ export default function SelectOrder() {
       value: "1km 이내로",
     },
   ];
-
-  // const rateList = [
-  //   {
-  //     id: 1,
-  //     type: "map",
-  //     key: "3점이상-리뷰100개이상",
-  //     value: "유명 관광지 위주로",
-  //   },
-  //   {
-  //     id: 2,
-  //     type: "map",
-  //     key: "3점이하-리뷰100개이하",
-  //     value: "로컬 관광지 위주로",
-  //   },
-  // ];
 
   const typeList = [
     {
@@ -114,7 +94,7 @@ export default function SelectOrder() {
   };
 
   const askGPT = async () => {
-    console.log("api start");
+    setIsLoading(true);
     try {
       const resp = await axios.post("http://localhost:8000/message", {
         keyword: location.state.searchData.keyword[0],
@@ -125,6 +105,8 @@ export default function SelectOrder() {
       console.log(resp.data);
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -140,17 +122,6 @@ export default function SelectOrder() {
     </CheckButton>
   ));
 
-  // const rateButtonList = rateList.map((item) => (
-  //   <CheckButton
-  //     key={item.id}
-  //     active={orderList.rate.includes(item.key)}
-  //     onClickHandler={() => {
-  //       selectOptionHandler("rate", item.key);
-  //     }}
-  //   >
-  //     {item.value}
-  //   </CheckButton>
-  // ));
   const typeButtonList = typeList.map((item) => (
     <CheckButton
       key={item.id}
@@ -185,6 +156,7 @@ export default function SelectOrder() {
       <Button disabled={!isButtonActive} float={true} onClickHandler={askGPT}>
         완료
       </Button>
+      {isLoading && <Loading />}
     </Layout>
   );
 }
