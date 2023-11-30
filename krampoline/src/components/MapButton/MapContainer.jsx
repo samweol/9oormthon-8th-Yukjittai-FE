@@ -1,6 +1,34 @@
+
 import React, { useEffect, useState } from 'react'
+import { styled } from "styled-components";
+import { COLOR } from "../../utils/color";
+import { FONT_SIZE } from "../../utils/fontSize";
 
 const { kakao } = window
+
+
+const LocationButtonStyle = styled.button`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 6px;
+  background-color: ${COLOR["bg-gray-500"]};
+  border: none;
+  border-radius: 10px;
+  min-width: 345px;
+  cursor: pointer;
+  margin-bottom: 8px;
+`;
+
+const TitleStyle = styled.span`
+  font-size: ${FONT_SIZE.m};
+  font-weight: 500;
+`;
+
+const AddressStyle = styled.span`
+  font-size: ${FONT_SIZE.s};
+  color: ${COLOR["font-gray-700"]};
+`;
 
 const MapContainer = ({ searchPlace }) => {
   const [Places, setPlaces] = useState([]);
@@ -15,7 +43,7 @@ const MapContainer = ({ searchPlace }) => {
     const map = new kakao.maps.Map(container, options);
 
     const ps = new kakao.maps.services.Places();
-    ps.keywordSearch(`제주도 ${"중국집"}`, placesSearchCB);
+    ps.keywordSearch(`제주도 ${"한식"}`, placesSearchCB);
 
     function placesSearchCB(data, status) {
       if (status === kakao.maps.services.Status.OK) {
@@ -52,21 +80,21 @@ const MapContainer = ({ searchPlace }) => {
       <div id="myMap" style={{ width: '100%', height: '200px', marginBottom: '20px', marginTop:'20px'}}></div>
       <div id="result-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
         {Places.map((item, i) => (
-          <div key={i} style={{ marginTop: '20px' }}>
+          <LocationButtonStyle key={i} style={{ marginTop: '20px' }}>
             <div>
-              <h5>{item.place_name}</h5>
+              <TitleStyle>{item.place_name}</TitleStyle>
               {item.road_address_name ? (
                 <div>
-                  <span>{item.road_address_name}</span>
-                  <span>{item.address_name}</span>
+                  <AddressStyle>{item.road_address_name}</AddressStyle>
+                  <AddressStyle>{item.address_name}</AddressStyle>
                 </div>
               ) : (
                 <span>{item.address_name}</span>
               )}
-              <span>{item.phone}</span> <br />
-              <span>{item.category_group_name}</span>
+              <AddressStyle>{item.phone}</AddressStyle> <br />
+              <AddressStyle>{item.category_group_name}</AddressStyle>
             </div>
-          </div>
+          </LocationButtonStyle>
         ))}
       </div>
     </div>

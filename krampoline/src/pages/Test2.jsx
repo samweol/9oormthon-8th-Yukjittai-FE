@@ -6,6 +6,7 @@ import Layout from '../components/Layout/Layout';
 import LandingPage from '../components/MapButton/LandingPage';
 import MapContainer from '../components/MapButton/MapContainer';
 import MapHeader from '../components/MapButton/MapHeader';
+import Kakao from './Kakao';
 
 const Test2 = () => {
     const optionList = [
@@ -45,7 +46,7 @@ const Test2 = () => {
     return (
         <Layout>
         <MapHeader />
-        <MapContainer />
+        <Kakao />
         <Button>다시 찾기</Button>
       </Layout>
     );
