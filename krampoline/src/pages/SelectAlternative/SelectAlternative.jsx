@@ -85,12 +85,12 @@ export default function SelectAlternative() {
       >
         {location.state.searchData.location["place_name"]}
       </LocationHeader>
-      <LabelHeader>어떤 대안으로 추천해 드릴까요?</LabelHeader>
+      <LabelHeader labelText="어떤 대안으로 추천해 드릴까요?" />
       {optionButtonList}
       <Button
         float={true}
         onClickHandler={() => {
-          //   askGPT();
+          // askGPT();
           navigate("/select/order", {
             state: {
               searchData: {

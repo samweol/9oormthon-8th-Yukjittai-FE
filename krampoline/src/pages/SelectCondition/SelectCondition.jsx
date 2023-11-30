@@ -65,7 +65,7 @@ export default function SelectCondition() {
       <LocationHeader location={location.state.location["address_name"]}>
         {location.state.location["place_name"]}
       </LocationHeader>
-      <LabelHeader>방문하지 못하는 이유가 무엇인가요?</LabelHeader>
+      <LabelHeader labelText="방문하지 못하는 이유가 무엇인가요?" />
       {optionButtonList}
       <Button
         float={true}
