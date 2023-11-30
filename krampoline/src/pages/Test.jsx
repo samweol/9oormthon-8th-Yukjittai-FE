@@ -5,6 +5,7 @@ import { useState } from "react";
 import LocationHeader from "../components/Header/LocationHeader";
 import LabelHeader from "../components/Header/LabelHeader";
 import Layout from "../components/Layout/Layout";
+import Input from "../components/Input/Input";
 
 export default function Test() {
   const optionList = [
@@ -60,6 +61,7 @@ export default function Test() {
       <LocationHeader />
       <LabelHeader>어떤 상황인가요?</LabelHeader>
       {optionButtonList}
+      <Input placeholder="주소를 입력해주세요." />
       <Button>다음</Button>
     </Layout>
   );
