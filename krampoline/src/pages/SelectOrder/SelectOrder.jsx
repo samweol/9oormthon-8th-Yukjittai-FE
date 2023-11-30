@@ -10,7 +10,6 @@ import axios from "axios";
 export default function SelectOrder() {
   const [orderList, setOrderList] = useState({
     distance: [],
-    rate: [],
     type: [],
   });
   const location = useLocation();
@@ -44,20 +43,20 @@ export default function SelectOrder() {
     },
   ];
 
-  const rateList = [
-    {
-      id: 1,
-      type: "map",
-      key: "3점이상-리뷰100개이상",
-      value: "유명 관광지 위주로",
-    },
-    {
-      id: 2,
-      type: "map",
-      key: "3점이하-리뷰100개이하",
-      value: "로컬 관광지 위주로",
-    },
-  ];
+  // const rateList = [
+  //   {
+  //     id: 1,
+  //     type: "map",
+  //     key: "3점이상-리뷰100개이상",
+  //     value: "유명 관광지 위주로",
+  //   },
+  //   {
+  //     id: 2,
+  //     type: "map",
+  //     key: "3점이하-리뷰100개이하",
+  //     value: "로컬 관광지 위주로",
+  //   },
+  // ];
 
   const typeList = [
     {
@@ -141,17 +140,17 @@ export default function SelectOrder() {
     </CheckButton>
   ));
 
-  const rateButtonList = rateList.map((item) => (
-    <CheckButton
-      key={item.id}
-      active={orderList.rate.includes(item.key)}
-      onClickHandler={() => {
-        selectOptionHandler("rate", item.key);
-      }}
-    >
-      {item.value}
-    </CheckButton>
-  ));
+  // const rateButtonList = rateList.map((item) => (
+  //   <CheckButton
+  //     key={item.id}
+  //     active={orderList.rate.includes(item.key)}
+  //     onClickHandler={() => {
+  //       selectOptionHandler("rate", item.key);
+  //     }}
+  //   >
+  //     {item.value}
+  //   </CheckButton>
+  // ));
   const typeButtonList = typeList.map((item) => (
     <CheckButton
       key={item.id}
@@ -179,8 +178,8 @@ export default function SelectOrder() {
         }
       />
       {distanceButtonList}
-      <LabelHeader labelText="인지도" />
-      {rateButtonList}
+      {/* <LabelHeader labelText="인지도" />
+      {rateButtonList} */}
       <LabelHeader labelText="장소 및 종류" />
       {typeButtonList}
       <Button disabled={!isButtonActive} float={true} onClickHandler={askGPT}>
