@@ -25,20 +25,17 @@ export default function SelectOrder() {
   const distanceList = [
     {
       id: 1,
-      type: "map",
-      key: "멋진 뷰를 볼 수 있는",
+      key: "가까운 순으로",
       value: "최대한 근처로",
     },
     {
       id: 2,
-      type: "map",
-      key: "2-평점-장소",
+      key: "500m",
       value: "500m 이내로",
     },
     {
       id: 3,
-      type: "gpt",
-      key: "3-실내관광",
+      key: "1km",
       value: "1km 이내로",
     },
   ];
@@ -47,13 +44,13 @@ export default function SelectOrder() {
     {
       id: 1,
       type: "map",
-      key: "멋진 뷰를 볼 수 있는",
+      key: "3점이상-리뷰100개이상",
       value: "유명 관광지 위주로",
     },
     {
       id: 2,
       type: "map",
-      key: "2-평점-장소",
+      key: "3점이하-리뷰100개이하",
       value: "로컬 관광지 위주로",
     },
   ];
@@ -62,25 +59,25 @@ export default function SelectOrder() {
     {
       id: 1,
       type: "map",
-      key: "멋진 뷰를 볼 수 있는",
+      key: "실내 관광지",
       value: "실내 관광지",
     },
     {
       id: 2,
       type: "map",
-      key: "2-평점-장소",
-      value: "이색 관광지",
+      key: "테마 관광지",
+      value: "테마 관광지",
     },
     {
       id: 3,
       type: "map",
-      key: "멋진 뷰를 볼 수 있는",
+      key: "자연 관광지",
       value: "자연 관광지",
     },
     {
       id: 4,
       type: "map",
-      key: "2-평점-장소",
+      key: "야외 관광지",
       value: "야외 관광지",
     },
   ];
@@ -161,7 +158,7 @@ export default function SelectOrder() {
         }
       />
       {distanceButtonList}
-      <LabelHeader labelText="평점" />
+      <LabelHeader labelText="인지도" />
       {rateButtonList}
       <LabelHeader labelText="장소 및 종류" />
       {typeButtonList}

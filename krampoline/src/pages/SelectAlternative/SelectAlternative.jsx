@@ -6,7 +6,6 @@ import LocationHeader from "../../components/Header/LocationHeader";
 import LabelHeader from "../../components/Header/LabelHeader";
 import CheckButton from "../../components/CheckButton/CheckButton";
 import { useState } from "react";
-import axios from "axios";
 
 export default function SelectAlternative() {
   const [keywordList, setKeywordList] = useState([]);
@@ -65,19 +64,6 @@ export default function SelectAlternative() {
     </CheckButton>
   ));
 
-  const askGPT = async () => {
-    console.log("in");
-    try {
-      const resp = await axios.post("http://localhost:8000/message", {
-        message: [...location.state.searchData.keyword, ...keywordList],
-      });
-
-      console.log(resp);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   return (
     <Layout>
       <LocationHeader
@@ -90,7 +76,6 @@ export default function SelectAlternative() {
       <Button
         float={true}
         onClickHandler={() => {
-          // askGPT();
           navigate("/select/order", {
             state: {
               searchData: {
