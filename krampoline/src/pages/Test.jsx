@@ -12,12 +12,12 @@ export default function Test() {
     },
     {
       id: 2,
-      key: "거리",
+      key: "거리-긴여행",
       value: "긴 여행으로 지쳤어요..",
     },
     {
       id: 3,
-      key: "거리",
+      key: "거리-이동거리",
       value: "음식점까지의 이동거리가 멀어요.",
     },
     {
@@ -32,15 +32,30 @@ export default function Test() {
     },
   ];
 
-  const optionButtonList = optionList.map((item) => (
-    <CheckButton>{item.value}</CheckButton>
-  ));
   const [keywordList, setKeywordList] = useState([]);
-  const selectOptionHandler = () => {};
+
+  const selectOptionHandler = (type) => {
+    if (keywordList.includes(type)) {
+      setKeywordList(keywordList.filter((item) => item !== type));
+    } else {
+      setKeywordList([...keywordList, type]);
+    }
+  };
+
+  const optionButtonList = optionList.map((item) => (
+    <CheckButton
+      onClickHandler={() => {
+        selectOptionHandler(item.key);
+      }}
+    >
+      {item.value}
+    </CheckButton>
+  ));
+
   return (
     <>
-      <Button>다음</Button>
       {optionButtonList}
+      <Button>다음</Button>
     </>
   );
 }
