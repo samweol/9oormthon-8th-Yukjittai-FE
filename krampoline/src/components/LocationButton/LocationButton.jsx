@@ -15,7 +15,7 @@ const LocationButtonStyle = styled.button`
   background-color: ${COLOR["bg-gray-500"]};
   border: none;
   border-radius: 10px;
-  min-width: 325px;
+  min-width: 345px;
   cursor: pointer;
   margin-bottom: 8px;
 `;

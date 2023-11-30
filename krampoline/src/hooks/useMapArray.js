@@ -31,7 +31,7 @@ export default function useMapArray() {
     } catch (error) {
       setArrayInfo({ isLoading: true, data, isError: true });
     }
-  }, []);
+  }, [keyword]);
 
   return {
     isLoading,

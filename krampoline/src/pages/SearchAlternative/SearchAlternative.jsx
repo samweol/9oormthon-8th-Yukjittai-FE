@@ -22,6 +22,8 @@ export default function SearchAlternative() {
   const inputRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data, isLoading, isError } = useMapArray();
+
+  console.log(data);
   const locationList = data?.map((item) => (
     <LocationButton
       address={item}
