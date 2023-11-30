@@ -4,6 +4,7 @@ import { styled } from "styled-components";
 import { COLOR } from "./utils/color";
 import { FONT_SIZE } from "./utils/fontSize";
 import { useNavigate } from "react-router-dom";
+import { ReactComponent as MainLogo } from "./assets/icons/MainLogo.svg";
 
 const TitleStyle = styled.h1`
   display: flex;
@@ -13,6 +14,7 @@ const TitleStyle = styled.h1`
   font-size: ${FONT_SIZE.xl};
   margin-bottom: 32px;
   line-height: 31.2px;
+  margin-top: 24px;
 `;
 
 const Emphasis = styled.strong`
@@ -29,6 +31,7 @@ function App() {
   return (
     <Layout hasHeader={true} bgImage={true}>
       <SectionStyle>
+        <MainLogo />
         <TitleStyle>
           <span>
             <Emphasis>하꼼바꼼</Emphasis>과 함께
