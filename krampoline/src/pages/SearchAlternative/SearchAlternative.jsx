@@ -21,14 +21,18 @@ export default function SearchAlternative() {
   const navigate = useNavigate();
   const inputRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchData, setSearchData] = useState({
+    location: {},
+    standard: "",
+  });
   const { data, isLoading, isError } = useMapArray();
 
-  console.log(data);
   const locationList = data?.map((item) => (
     <LocationButton
       address={item}
       onClickHandler={() => {
         setIsModalOpen(!isModalOpen);
+        setSearchData({ ...searchData, location: item });
       }}
     />
   ));
@@ -57,11 +61,23 @@ export default function SearchAlternative() {
         >
           <ModalHeader />
           <ModalBody>
-            <ModalButton bgColor={COLOR["btn-oragne-light"]}>
+            <ModalButton
+              bgColor={COLOR["btn-oragne-light"]}
+              onClickHandler={() => {
+                setSearchData({ ...searchData, standard: "gps" });
+                navigate("/select/condition", { state: { searchData } });
+              }}
+            >
               <LocationMark />
               <span>내 위치 주변 추천</span>
             </ModalButton>
-            <ModalButton bgColor={COLOR["btn-disabled"]}>
+            <ModalButton
+              bgColor={COLOR["btn-disabled"]}
+              onClickHandler={() => {
+                setSearchData({ ...searchData, standard: "selectLocation" });
+                navigate("/select/condition", { state: { searchData } });
+              }}
+            >
               <LocationMark />
               <span>선택 장소 주변 추천</span>
             </ModalButton>
