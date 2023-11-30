@@ -104,7 +104,7 @@ export default function SearchAlternative() {
               <span>내 위치 주변 추천</span>
             </ModalButton>
             <ModalButton
-              bgColor={COLOR["btn-disabled"]}
+              bgColor={COLOR["btn-oragne-light"]}
               onClickHandler={() => {
                 navigate("/select/condition", {
                   state: { ...searchData, standard: "selectLocation" },
