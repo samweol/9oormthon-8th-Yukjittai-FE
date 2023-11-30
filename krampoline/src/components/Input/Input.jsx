@@ -11,7 +11,7 @@ const InputContainerStyle = styled.div`
   border-bottom: 2px solid ${COLOR["border-gray"]};
 `;
 const InputStyle = styled.input`
-  padding: 16px 0;
+  padding: 16px 8px;
   border: none;
   flex-grow: 1;
   font-size: ${FONT_SIZE.m};
