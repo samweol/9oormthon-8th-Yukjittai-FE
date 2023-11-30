@@ -27,7 +27,7 @@ const SectionStyle = styled.section`
 function App() {
   const navigate = useNavigate();
   return (
-    <Layout hasHeader={true}>
+    <Layout hasHeader={true} bgImage={true}>
       <SectionStyle>
         <TitleStyle>
           <span>
