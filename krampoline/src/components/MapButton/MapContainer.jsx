@@ -15,19 +15,19 @@ const MapContainer = ({ searchPlace }) => {
     const map = new kakao.maps.Map(container, options);
 
     const ps = new kakao.maps.services.Places();
-    ps.keywordSearch(`제주도 ${"고기국수"}`, placesSearchCB);
+    ps.keywordSearch(`제주도 ${"중국집"}`, placesSearchCB);
 
     function placesSearchCB(data, status) {
       if (status === kakao.maps.services.Status.OK) {
         let bounds = new kakao.maps.LatLngBounds();
 
-        for (let i = 0; i < 5 && i < data.length; i++) {
+        for (let i = 0; i < 7 && i < data.length; i++) {
           displayMarker(data[i]);
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
 
         map.setBounds(bounds);
-        setPlaces(data.slice(0, 5));
+        setPlaces(data.slice(0, 7));
       }
     }
 
@@ -45,16 +45,12 @@ const MapContainer = ({ searchPlace }) => {
       });
     }
   }, [searchPlace]);
+
+
   return (
     <div>
-      <div id="result-list">
-      <div
-        id="myMap"
-        style={{
-          width: '390px',
-          height: '300px',
-        }}
-      ></div>
+      <div id="myMap" style={{ width: '100%', height: '200px', marginBottom: '20px', marginTop:'20px'}}></div>
+      <div id="result-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
         {Places.map((item, i) => (
           <div key={i} style={{ marginTop: '20px' }}>
             <div>
