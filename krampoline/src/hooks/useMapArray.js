@@ -7,8 +7,7 @@ export default function useMapArray() {
     isLoading: false,
     isError: false,
   });
-  const a = useParams();
-  console.log({ a });
+  const keyword = useParams();
 
   useEffect(() => {
     try {
@@ -27,11 +26,13 @@ export default function useMapArray() {
       }
       setArrayInfo({ data, isLoading: true, isError: false });
       const ps = new kakao.maps.services.Places();
-      ps.keywordSearch("치킨", placesSearchCB);
+      console.log(keyword);
+
+      ps.keywordSearch(keyword, placesSearchCB);
     } catch (error) {
       setArrayInfo({ isLoading: true, data, isError: true });
     }
-  }, []);
+  }, [keyword]);
 
   return {
     isLoading,

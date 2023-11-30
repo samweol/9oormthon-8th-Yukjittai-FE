@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { styled } from "styled-components";
 import { COLOR } from "../../utils/color";
 import { FONT_SIZE } from "../../utils/fontSize";
@@ -29,15 +29,23 @@ const SearchButtonStyle = styled.button`
   background: transparent;
   border: none;
   padding: 0 16px 0 0;
+  cursor: pointer;
 `;
-export default function Input(props) {
-  const { placeholder, onClickHanlder, onChangeHandler } = props;
+
+const Input = forwardRef(function Input(props, ref) {
+  const { placeholder, onClickHandler, onChangeHandler } = props;
   return (
     <InputContainerStyle>
-      <InputStyle placeholder={placeholder} onChange={onChangeHandler} />
-      <SearchButtonStyle onClick={onClickHanlder}>
+      <InputStyle
+        ref={ref}
+        placeholder={placeholder}
+        onChange={onChangeHandler}
+      />
+      <SearchButtonStyle onClick={onClickHandler}>
         <Search />
       </SearchButtonStyle>
     </InputContainerStyle>
   );
-}
+});
+
+export default Input;
