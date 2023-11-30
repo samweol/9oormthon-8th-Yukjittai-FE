@@ -23,10 +23,10 @@ const ButtonTextStyle = styled.span`
 `;
 
 export default function CheckButton(props) {
-  const { children, onClickHandler } = props;
+  const { children, active, onClickHandler } = props;
   return (
     <CheckButtonStyle onClick={onClickHandler}>
-      <UnCheck />
+      <UnCheck fill={active ? COLOR["btn-primary"] : "#D6D6D6"} />
       <ButtonTextStyle>{children}</ButtonTextStyle>
     </CheckButtonStyle>
   );

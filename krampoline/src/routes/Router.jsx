@@ -4,6 +4,7 @@ import App from "../App";
 import Test from "../pages/Test";
 import SearchAlternative from "../pages/SearchAlternative/SearchAlternative";
 import SelectCondition from "../pages/SelectCondition/SelectCondition";
+import SelectAlternative from "../pages/SelectAlternative/SelectAlternative";
 
 export default function Router() {
   return (
@@ -17,6 +18,7 @@ export default function Router() {
           element={<SearchAlternative />}
         />
         <Route path="/select/condition" element={<SelectCondition />} />
+        <Route path="/select/alternative" element={<SelectAlternative />} />
       </Routes>
     </BrowserRouter>
   );

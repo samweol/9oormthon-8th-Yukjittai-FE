@@ -5,13 +5,14 @@ import CheckButton from "../../components/CheckButton/CheckButton";
 import LocationHeader from "../../components/Header/LocationHeader";
 import LabelHeader from "../../components/Header/LabelHeader";
 import Button from "../../components/Button/Button";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function SelectCondition() {
   const [keywordList, setKeywordList] = useState([]);
 
   const location = useLocation();
   console.log(location.state);
+  const navigate = useNavigate();
 
   const optionList = [
     {
@@ -49,6 +50,7 @@ export default function SelectCondition() {
   };
   const optionButtonList = optionList.map((item) => (
     <CheckButton
+      active={keywordList.includes(item.key)}
       onClickHandler={() => {
         selectOptionHandler(item.key);
       }}
@@ -59,10 +61,27 @@ export default function SelectCondition() {
 
   return (
     <Layout>
-      <LocationHeader />
-      <LabelHeader>어떤 상황인가요?</LabelHeader>
+      <LocationHeader location={location.state.location["address_name"]}>
+        {location.state.location["place_name"]}
+      </LocationHeader>
+      <LabelHeader>방문하지 못하는 이유가 무엇인가요?</LabelHeader>
       {optionButtonList}
-      <Button float={true}>다음</Button>
+      <Button
+        float={true}
+        disabled={!keywordList.length}
+        onClickHandler={() => {
+          navigate("/select/alternative", {
+            state: {
+              searchData: {
+                ...location.state,
+                keyword: keywordList,
+              },
+            },
+          });
+        }}
+      >
+        다음
+      </Button>
     </Layout>
   );
 }

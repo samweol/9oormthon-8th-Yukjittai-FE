@@ -64,8 +64,9 @@ export default function SearchAlternative() {
             <ModalButton
               bgColor={COLOR["btn-oragne-light"]}
               onClickHandler={() => {
-                setSearchData({ ...searchData, standard: "gps" });
-                navigate("/select/condition", { state: { searchData } });
+                navigate("/select/condition", {
+                  state: { ...searchData, standard: "gps" },
+                });
               }}
             >
               <LocationMark />
@@ -74,8 +75,9 @@ export default function SearchAlternative() {
             <ModalButton
               bgColor={COLOR["btn-disabled"]}
               onClickHandler={() => {
-                setSearchData({ ...searchData, standard: "selectLocation" });
-                navigate("/select/condition", { state: { searchData } });
+                navigate("/select/condition", {
+                  state: { ...searchData, standard: "selectLocation" },
+                });
               }}
             >
               <LocationMark />

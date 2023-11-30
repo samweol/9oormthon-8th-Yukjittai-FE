@@ -23,7 +23,7 @@ export default function LocationHeader(props) {
   const { children, location, my } = props;
   return (
     <HeaderContainer my={my}>
-      <TitleStyle>{children}</TitleStyle>
+      <TitleStyle location={location}>{children}</TitleStyle>
       <LocationStyle>{location}</LocationStyle>
     </HeaderContainer>
   );
