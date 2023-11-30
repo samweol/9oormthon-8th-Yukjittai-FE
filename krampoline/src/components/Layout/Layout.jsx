@@ -10,8 +10,7 @@ const LayoutStyle = styled.section`
   flex-direction: column;
   padding: 0 24px;
   width: 393px;
-  min-height: 852px;
-  border: 1px solid red;
+  height: 852px;
   background-image: ${(props) => props.bgImage && `url(${Bg})`};
   background-repeat: no-repeat;
   background-size: cover;
