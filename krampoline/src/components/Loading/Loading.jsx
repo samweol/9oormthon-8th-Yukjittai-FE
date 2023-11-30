@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { keyframes, styled } from "styled-components";
 import { ReactComponent as LoadingIcon } from "../../assets/icons/LoadingIcon.svg";
 import { FONT_SIZE } from "../../utils/fontSize";
