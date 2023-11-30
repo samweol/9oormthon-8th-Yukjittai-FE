@@ -12,6 +12,7 @@ import ModalBody from "../../components/BottomModal/ModalBody";
 import ModalButton from "../../components/BottomModal/ModalButton";
 import { ReactComponent as LocationMark } from "../../assets/icons/LocationMark.svg";
 import { COLOR } from "../../utils/color";
+import Loading from "../../components/Loading/Loading";
 
 const ListContainer = styled.ul`
   margin-top: 24px;
@@ -25,6 +26,7 @@ export default function SearchAlternative() {
     location: {},
     standard: "",
   });
+  const [isMapLoading, setIsMapLoading] = useState(false);
   const { data, isLoading, isError } = useMapArray();
 
   const locationList = data?.map((item) => (
@@ -47,20 +49,23 @@ export default function SearchAlternative() {
       longitude: pos.coords.longitude,
     };
     setCurrentPosition(currentPos);
-    // alert(
-    //   `Latitude: ${currentPos.latitude}, Longitude: ${currentPos.longitude}`
-    // );
   };
 
   const locationLoadError = () => {
     alert("위치 정보를 가져오는데 실패했습니다.");
   };
 
-  const getCurrentPosBtn = () => {
-    navigator.geolocation.getCurrentPosition(
-      locationLoadSuccess,
-      locationLoadError
-    );
+  const getCurrentPosBtn = async () => {
+    return new Promise((res) => {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const currentPos = {
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+        };
+        res(currentPos);
+        setCurrentPosition(currentPos);
+      });
+    }, locationLoadError);
   };
 
   return (
@@ -89,15 +94,22 @@ export default function SearchAlternative() {
           <ModalBody>
             <ModalButton
               bgColor={COLOR["btn-oragne-light"]}
-              onClickHandler={() => {
-                getCurrentPosBtn();
-                navigate("/select/condition", {
-                  state: {
-                    ...searchData,
-                    standard: "gps",
-                    gps: currentPosition,
-                  },
-                });
+              onClickHandler={async () => {
+                setIsMapLoading(true);
+                try {
+                  const pos = await getCurrentPosBtn();
+                  navigate("/select/condition", {
+                    state: {
+                      ...searchData,
+                      standard: "gps",
+                      gps: pos,
+                    },
+                  });
+                } catch (err) {
+                  console.error(err);
+                } finally {
+                  setIsMapLoading(false);
+                }
               }}
             >
               <LocationMark />
@@ -117,6 +129,7 @@ export default function SearchAlternative() {
           </ModalBody>
         </BottomModal>
       )}
+      {isMapLoading && <Loading />}
     </Layout>
   );
 }
