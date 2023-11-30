@@ -90,7 +90,6 @@ export default function SearchAlternative() {
             <ModalButton
               bgColor={COLOR["btn-oragne-light"]}
               onClickHandler={() => {
-                // 여기에 gps 찾는 함수 만들어서 return 값 주세요
                 getCurrentPosBtn();
                 navigate("/select/condition", {
                   state: {

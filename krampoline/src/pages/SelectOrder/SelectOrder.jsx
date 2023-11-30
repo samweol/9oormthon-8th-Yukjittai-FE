@@ -16,8 +16,6 @@ export default function SelectOrder() {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
 
-  // console.log(location.state.searchData.location.x);
-
   const isButtonActive = Object.values(orderList).every((item) => item.length);
 
   const distanceList = [
@@ -149,10 +147,8 @@ export default function SelectOrder() {
         }
       />
       {distanceButtonList}
-      {/* <LabelHeader labelText="인지도" />
-      {rateButtonList} */}
       <LabelHeader labelText="장소 및 종류" />
-      {typeButtonList}
+      <div style={{ paddingBottom: "150px" }}>{typeButtonList}</div>
       <Button disabled={!isButtonActive} float={true} onClickHandler={askGPT}>
         완료
       </Button>
