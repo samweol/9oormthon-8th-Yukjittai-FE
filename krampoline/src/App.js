@@ -4,14 +4,7 @@ import Main from "./Main";
 import Test from "./pages/Test";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/test" element={<Test />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <div>app</div>;
 }
 
 export default App;
