@@ -12,6 +12,7 @@ const TitleStyle = styled.h1`
   font-weight: 500;
   font-size: ${FONT_SIZE.xl};
   margin-bottom: 32px;
+  line-height: 31.2px;
 `;
 
 const Emphasis = styled.strong`
@@ -30,16 +31,16 @@ function App() {
       <SectionStyle>
         <TitleStyle>
           <span>
-            <Emphasis>한끼하꼼</Emphasis>과 함께
+            <Emphasis>하꼼바꼼</Emphasis>과 함께
           </span>
-          <span>후회 없는 여행 하세요!</span>
+          <span>대안 여행지를 추천받아 보세요!</span>
         </TitleStyle>
         <Button
           onClickHandler={() => {
             navigate("search-alternative");
           }}
         >
-          일정 조율하러 가기
+          더 나은 일정 찾기
         </Button>
       </SectionStyle>
     </Layout>

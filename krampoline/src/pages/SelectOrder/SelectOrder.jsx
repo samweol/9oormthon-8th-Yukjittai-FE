@@ -15,12 +15,16 @@ export default function SelectOrder() {
   });
   const location = useLocation();
 
-  const isButtonActive = Object.values(orderList).every((item) => item.length);
+  console.log(location.state.searchData.location.x);
+  // location.state.searchData.standard : gps(내기준) || selectLocation(대안기준)
+  // selectionLocation (대안기준일때만 경도, 위도 보내줌)
+  // location.state.searchData.location.x : 경도
+  // location.state.searchData.location.y : 위도
+  // radius(반경) : 가까운 순으로 || 500m || 1km
+  // rate : 3점이상-리뷰100개이상 || 3점이하-리뷰100개이하
+  // type : 실내 || 테마 || 자연 || 야외
 
-  console.log([
-    ...location.state.searchData.keyword,
-    ...location.state.searchData.condition,
-  ]);
+  const isButtonActive = Object.values(orderList).every((item) => item.length);
 
   const distanceList = [
     {
@@ -90,6 +94,23 @@ export default function SelectOrder() {
       });
     } else {
       setOrderList({ ...orderList, [key]: [type] });
+    }
+  };
+
+  const callKakaoMapAPI = async () => {
+    try {
+      const resp = await axios.post("http://localhost:8000/kakao/directions", {
+        standard: "",
+        x: "",
+        y: "",
+        radius: "",
+        rate: "",
+        type: "",
+      });
+
+      console.log(resp);
+    } catch (err) {
+      console.error(err);
     }
   };
 

@@ -19,25 +19,25 @@ export default function SelectCondition() {
       id: 1,
       type: "map",
       key: "긴 여행으로 지쳐있습니다.",
-      value: "긴 여행으로 지쳤어요.",
+      value: "긴 여행으로 지쳤어요 💦",
     },
     {
       id: 2,
       type: "map",
       key: "이동거리",
-      value: "관광지까지의 이동 거리가 멀어요.",
+      value: "관광지까지의 이동거리가 멀어요 👟",
     },
     {
       id: 3,
       type: "gpt",
       key: "실내관광",
-      value: "비가 와서 방문할 수 없어요",
+      value: "비가 와서 방문할 수 없어요 🌪️",
     },
     {
       id: 4,
       type: "gpt",
       key: "",
-      value: "그 외에 다른 이유예요.",
+      value: "그 외에 다른 이유예요 💬.",
     },
   ];
 

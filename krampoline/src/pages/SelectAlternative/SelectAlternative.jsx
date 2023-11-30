@@ -75,6 +75,7 @@ export default function SelectAlternative() {
       {optionButtonList}
       <Button
         float={true}
+        disabled={false}
         onClickHandler={() => {
           navigate("/select/order", {
             state: {

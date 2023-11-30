@@ -6,15 +6,14 @@ import { FONT_SIZE } from "../../utils/fontSize";
 const ButtonStyle = styled.button`
   margin: 0 auto;
   background-color: ${(props) =>
-    props.disabled ? COLOR["btn-disabled"] : COLOR["btn-primary"]};
+    props.disabled ? COLOR["btn-oragne-light"] : COLOR["btn-primary"]};
   border: none;
   padding: 20px 26px;
   width: 345px;
   border-radius: 10px;
   cursor: ${(props) => (props.disabled ? "" : "pointer")};
 
-  color: ${(props) =>
-    props.disabled ? COLOR["font-black"] : COLOR["font-white"]};
+  color: ${COLOR["font-white"]};
   font-size: ${FONT_SIZE.m};
 `;
 
@@ -25,15 +24,14 @@ const FloatButtonStyle = styled.button`
   transform: translate(-50%);
   margin: 0 auto;
   background-color: ${(props) =>
-    props.disabled ? COLOR["btn-disabled"] : COLOR["btn-primary"]};
+    props.disabled ? COLOR["btn-oragne-light"] : COLOR["btn-primary"]};
   border: none;
   padding: 20px 26px;
   width: 345px;
   border-radius: 10px;
   cursor: ${(props) => (props.disabled ? "" : "pointer")};
 
-  color: ${(props) =>
-    props.disabled ? COLOR["font-black"] : COLOR["font-white"]};
+  color: ${COLOR["font-white"]};
   font-size: ${FONT_SIZE.m};
 `;
 

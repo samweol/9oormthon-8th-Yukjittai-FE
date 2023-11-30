@@ -29,6 +29,7 @@ export default function SearchAlternative() {
 
   const locationList = data?.map((item) => (
     <LocationButton
+      key={item.id}
       address={item}
       onClickHandler={() => {
         setIsModalOpen(!isModalOpen);
@@ -40,12 +41,12 @@ export default function SearchAlternative() {
   return (
     <Layout>
       <LocationHeader my="57px">
-        대안책이 필요한
-        <br /> 장소를 검색해주세요!
+        대안이 필요한
+        <br /> 기존 여행지 정보를 입력해주세요!
       </LocationHeader>
       <Input
         ref={inputRef}
-        placeholder="주소를 입력해주세요."
+        placeholder="장소명을 입력해주세요."
         onClickHandler={() => {
           if (inputRef.current.value.length) {
             navigate(`/search-alternative/${inputRef.current.value}`);

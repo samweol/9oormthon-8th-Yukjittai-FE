@@ -11,6 +11,7 @@ const ModalButtonStyle = styled.button`
   border-radius: 10px;
   border: none;
   background-color: ${(props) => props.bgColor};
+  cursor: pointer;
 
   font-size: ${FONT_SIZE.m};
 `;
