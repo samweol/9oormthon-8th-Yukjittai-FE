@@ -18,7 +18,7 @@ export default function SelectCondition() {
     {
       id: 1,
       type: "map",
-      key: "거리-긴여행",
+      key: "긴 여행으로 지쳐있습니다.",
       value: "긴 여행으로 지쳤어요.",
     },
     {
@@ -50,6 +50,7 @@ export default function SelectCondition() {
   };
   const optionButtonList = optionList.map((item) => (
     <CheckButton
+      key={item.id}
       active={keywordList.includes(item.key)}
       onClickHandler={() => {
         selectOptionHandler(item.key);

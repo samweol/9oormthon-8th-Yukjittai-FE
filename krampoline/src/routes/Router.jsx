@@ -5,6 +5,7 @@ import Test from "../pages/Test";
 import SearchAlternative from "../pages/SearchAlternative/SearchAlternative";
 import SelectCondition from "../pages/SelectCondition/SelectCondition";
 import SelectAlternative from "../pages/SelectAlternative/SelectAlternative";
+import SelectOrder from "../pages/SelectOrder/SelectOrder";
 
 export default function Router() {
   return (
@@ -19,6 +20,7 @@ export default function Router() {
         />
         <Route path="/select/condition" element={<SelectCondition />} />
         <Route path="/select/alternative" element={<SelectAlternative />} />
+        <Route path="/select/order" element={<SelectOrder />} />
       </Routes>
     </BrowserRouter>
   );
