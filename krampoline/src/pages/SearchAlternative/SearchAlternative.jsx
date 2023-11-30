@@ -6,6 +6,12 @@ import { useNavigate } from "react-router-dom";
 import useMapArray from "../../hooks/useMapArray";
 import LocationButton from "../../components/LocationButton/LocationButton";
 import { styled } from "styled-components";
+import BottomModal from "../../components/BottomModal/BottomModal";
+import ModalHeader from "../../components/BottomModal/ModalHeader";
+import ModalBody from "../../components/BottomModal/ModalBody";
+import ModalButton from "../../components/BottomModal/ModalButton";
+import { ReactComponent as LocationMark } from "../../assets/icons/LocationMark.svg";
+import { COLOR } from "../../utils/color";
 
 const ListContainer = styled.ul`
   margin-top: 24px;
@@ -14,12 +20,13 @@ const ListContainer = styled.ul`
 export default function SearchAlternative() {
   const navigate = useNavigate();
   const inputRef = useRef();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { data, isLoading, isError } = useMapArray();
   const locationList = data?.map((item) => (
     <LocationButton
       address={item}
       onClickHandler={() => {
-        navigate("/select/condition");
+        setIsModalOpen(!isModalOpen);
       }}
     />
   ));
@@ -40,6 +47,25 @@ export default function SearchAlternative() {
         }}
       />
       <ListContainer>{locationList}</ListContainer>
+      {isModalOpen && (
+        <BottomModal
+          onModalHandler={() => {
+            setIsModalOpen(false);
+          }}
+        >
+          <ModalHeader />
+          <ModalBody>
+            <ModalButton bgColor={COLOR["btn-oragne-light"]}>
+              <LocationMark />
+              <span>내 위치 주변 추천</span>
+            </ModalButton>
+            <ModalButton bgColor={COLOR["btn-disabled"]}>
+              <LocationMark />
+              <span>선택 장소 주변 추천</span>
+            </ModalButton>
+          </ModalBody>
+        </BottomModal>
+      )}
     </Layout>
   );
 }

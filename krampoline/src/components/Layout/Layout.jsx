@@ -10,7 +10,6 @@ const LayoutStyle = styled.section`
   padding: 0 24px;
   max-width: 345px;
   min-height: 852px;
-
   border: 1px solid red;
 `;
 export default function Layout(props) {
