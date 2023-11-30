@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Button from '../components/Button/Button';
 import CheckButton from '../components/CheckButton/CheckButton';
 import LabelHeader from '../components/Header/LabelHeader';
-import LocationHeader from '../components/Header/LocationHeader';
 import Layout from '../components/Layout/Layout';
 import LandingPage from '../components/MapButton/LandingPage';
 import MapContainer from '../components/MapButton/MapContainer';
