@@ -13,7 +13,6 @@ import ModalButton from "../../components/BottomModal/ModalButton";
 import { ReactComponent as LocationMark } from "../../assets/icons/LocationMark.svg";
 import { COLOR } from "../../utils/color";
 
-
 const ListContainer = styled.ul`
   margin-top: 24px;
 `;
@@ -39,25 +38,29 @@ export default function SearchAlternative() {
     />
   ));
 
-
   // 위도, 경로 검색
   const [currentPosition, setCurrentPosition] = useState(null);
 
   const locationLoadSuccess = (pos) => {
-      const currentPos = {
-          latitude: pos.coords.latitude,
-          longitude: pos.coords.longitude
-      };
-      setCurrentPosition(currentPos);
-      alert(`Latitude: ${currentPos.latitude}, Longitude: ${currentPos.longitude}`);
+    const currentPos = {
+      latitude: pos.coords.latitude,
+      longitude: pos.coords.longitude,
+    };
+    setCurrentPosition(currentPos);
+    // alert(
+    //   `Latitude: ${currentPos.latitude}, Longitude: ${currentPos.longitude}`
+    // );
   };
 
   const locationLoadError = () => {
-      alert('위치 정보를 가져오는데 실패했습니다.');
+    alert("위치 정보를 가져오는데 실패했습니다.");
   };
 
   const getCurrentPosBtn = () => {
-      navigator.geolocation.getCurrentPosition(locationLoadSuccess, locationLoadError);
+    navigator.geolocation.getCurrentPosition(
+      locationLoadSuccess,
+      locationLoadError
+    );
   };
 
   return (
@@ -88,10 +91,14 @@ export default function SearchAlternative() {
               bgColor={COLOR["btn-oragne-light"]}
               onClickHandler={() => {
                 // 여기에 gps 찾는 함수 만들어서 return 값 주세요
-                getCurrentPosBtn()
-                // navigate("/select/condition", {
-                //   state: { ...searchData, standard: "gps" },
-                // });
+                getCurrentPosBtn();
+                navigate("/select/condition", {
+                  state: {
+                    ...searchData,
+                    standard: "gps",
+                    gps: currentPosition,
+                  },
+                });
               }}
             >
               <LocationMark />
