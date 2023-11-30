@@ -1,21 +1,40 @@
 import React, { useEffect } from 'react';
 
 export default function Kakao() {
+    const kakaoMapData = JSON.parse(localStorage.getItem('kakaoMapData'));
+    const diarectMap = JSON.parse(localStorage.getItem('diarectMap'));
+
+    console.log(kakaoMapData);
+
     useEffect(() => {
         const mapContainer = document.getElementById('map'); // 지도를 표시할 div
         const mapOption = {
-            center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            center: new window.kakao.maps.LatLng(diarectMap.destinations[0].y, diarectMap.destinations[0].x), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
         };
+        console.log("ddd", diarectMap.origin[0].y);
+        console.log("ddd", diarectMap.origin[0].x);
 
         const map = new window.kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
         const positions = [
             {
-                content: '<div>카카오</div>', 
-                latlng: new window.kakao.maps.LatLng(33.450705, 126.570677)
+                content: '<div></div>', 
+                latlng: new window.kakao.maps.LatLng(diarectMap.destinations[0].y, diarectMap.destinations[0].x)
             },
-            // ... (other positions)
+            {
+                content: '<div></div>', 
+                latlng: new window.kakao.maps.LatLng(diarectMap.destinations[1].y, diarectMap.destinations[1].x)
+            },
+            {
+                content: '<div></div>', 
+                latlng: new window.kakao.maps.LatLng(diarectMap.destinations[2].y, diarectMap.destinations[2].x)
+            },
+            {
+                content: '<div></div>',
+                latlng: new window.kakao.maps.LatLng(diarectMap.destinations[3].y, diarectMap.destinations[3].x)
+            }
+
         ];
 
         positions.forEach((position) => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import LocationHeader from "../../components/Header/LocationHeader";
 import LabelHeader from "../../components/Header/LabelHeader";
 import CheckButton from "../../components/CheckButton/CheckButton";
@@ -77,15 +77,29 @@ export default function SelectOrder() {
     }
   };
 
+  // const callKakaoMapAPI = async (body) => {
+  //   try {
+  //     const resp = await axios.post("http://localhost:8000/kakao/directions", body);
+  //     console.log("respdddd : ", resp);
+
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
   const callKakaoMapAPI = async (body) => {
     try {
+      localStorage.setItem('diarectMap', JSON.stringify(body));
       const resp = await axios.post("http://localhost:8000/kakao/directions", body);
       console.log("resp : ", resp);
-
+  
+      // resp 데이터를 문자열로 변환하여 localStorage에 저장
+      localStorage.setItem('kakaoMapData', JSON.stringify(resp.data));
     } catch (err) {
       console.error(err);
     }
   };
+  
 
 
   const [gptResponse, setGptResponse] = useState("");
@@ -236,9 +250,9 @@ useEffect(() => {
       {distanceButtonList}
       <LabelHeader labelText="장소 및 종류" />
       <div style={{ paddingBottom: "150px" }}>{typeButtonList}</div>
-      <Button disabled={!isButtonActive} float={true} onClickHandler={askGPT}>
+      <Link to="/dd"><Button disabled={!isButtonActive} float={true} onClickHandler={askGPT}>
         완료
-      </Button>
+      </Button></Link>
       {isLoading && <Loading />}
     </Layout>
   );

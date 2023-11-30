@@ -23,7 +23,7 @@ export default function Router() {
         <Route path="/select/condition" element={<SelectCondition />} />
         <Route path="/select/alternative" element={<SelectAlternative />} />
         <Route path="/select/order" element={<SelectOrder />} />
-        <Route path="/test2" element={<Test2 />} />
+        <Route path="/dd" element={<Test2 />} />
       </Routes>
     </BrowserRouter>
   );
