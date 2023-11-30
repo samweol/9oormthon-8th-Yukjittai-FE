@@ -3,6 +3,7 @@ import Button from "../components/Button/Button";
 import CheckButton from "../components/CheckButton/CheckButton";
 import { useState } from "react";
 import LocationHeader from "../components/Header/LocationHeader";
+import LabelHeader from "../components/Header/LabelHeader";
 
 export default function Test() {
   const optionList = [
@@ -56,6 +57,7 @@ export default function Test() {
   return (
     <>
       <LocationHeader />
+      <LabelHeader>어떤 상황인가요?</LabelHeader>
       {optionButtonList}
       <Button>다음</Button>
     </>

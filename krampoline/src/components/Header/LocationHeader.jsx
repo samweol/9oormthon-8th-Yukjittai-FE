@@ -6,8 +6,9 @@ import { FONT_SIZE } from "../../utils/fontSize";
 const HeaderContainer = styled.section``;
 const TitleStyle = styled.h1`
   color: ${COLOR["font-black"]};
-  font-size: ${FONT_SIZE.l};
+  font-size: ${FONT_SIZE.xl};
   font-weight: 500;
+  padding-top: 30px;
   margin-bottom: 8px;
 `;
 const LocationStyle = styled.p`
