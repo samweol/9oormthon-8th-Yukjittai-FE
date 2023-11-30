@@ -5,6 +5,7 @@ import LabelHeader from '../components/Header/LabelHeader';
 import LocationHeader from '../components/Header/LocationHeader';
 import Layout from '../components/Layout/Layout';
 import LandingPage from '../components/MapButton/LandingPage';
+import MapContainer from '../components/MapButton/MapContainer';
 import MapHeader from '../components/MapButton/MapHeader';
 
 const Test2 = () => {
@@ -45,9 +46,7 @@ const Test2 = () => {
     return (
         <Layout>
         <MapHeader />
-        <LabelHeader>어떤 상황인가요?</LabelHeader>
-        {optionButtonList}
-        <LandingPage />
+        <MapContainer />
         <Button>다시 찾기</Button>
       </Layout>
     );
