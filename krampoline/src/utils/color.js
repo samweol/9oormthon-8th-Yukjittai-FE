@@ -5,7 +5,9 @@ export const COLOR = {
   "font-black": "#000000",
   "font-gray-100": "#CED2D7",
   "font-gray-300": "#87919B",
+  "font-gray-800": "#515151",
   "font-gray-900": "#656565",
+
   "font-white": "#FFFFFF",
 
   "bg-gray-500": "#F6F6F6",
