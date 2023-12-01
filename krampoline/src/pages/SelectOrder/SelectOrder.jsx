@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
-import { useLocation, Link } from "react-router-dom";
+
+import { useLocation, useNavigate } from "react-router-dom";
 import LocationHeader from "../../components/Header/LocationHeader";
 import LabelHeader from "../../components/Header/LabelHeader";
 import CheckButton from "../../components/CheckButton/CheckButton";
@@ -13,13 +14,14 @@ export default function SelectOrder() {
     distance: [],
     type: [],
   });
+
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isButtonActive = Object.values(orderList).every((item) => item.length);
 
-  const { kakao } = window
-
+  const { kakao } = window;
 
   const distanceList = [
     {
@@ -77,33 +79,29 @@ export default function SelectOrder() {
     }
   };
 
-  // const callKakaoMapAPI = async (body) => {
-  //   try {
-  //     const resp = await axios.post("http://localhost:8000/kakao/directions", body);
-  //     console.log("respdddd : ", resp);
-
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
   const callKakaoMapAPI = async (body) => {
     try {
-      localStorage.setItem('diarectMap', JSON.stringify(body));
-      const resp = await axios.post("http://localhost:8000/kakao/directions", body);
-      console.log("resp : ", resp);
-  
-      // resp 데이터를 문자열로 변환하여 localStorage에 저장
-      localStorage.setItem('kakaoMapData', JSON.stringify(resp.data));
+      localStorage.setItem("diarectMap", JSON.stringify(body));
+
+      const resp = await axios.post(
+        "http://localhost:8000/kakao/directions",
+        body
+      );
+      navigate("/report", {
+        state: {
+          position: body,
+          data: resp.data,
+        },
+      });
     } catch (err) {
       console.error(err);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
-  
-
 
   const [gptResponse, setGptResponse] = useState("");
-
 
   const askGPT = async () => {
     setIsLoading(true);
@@ -113,101 +111,70 @@ export default function SelectOrder() {
         condition1: location.state.searchData.condition[0],
         condition2: location.state.searchData.condition[1],
       });
-  
-      console.log("askGPT", resp.data);
-      setGptResponse(resp.data); 
+
+      setGptResponse(resp.data);
     } catch (err) {
       console.error(err);
-    } finally {
-      setIsLoading(false);
     }
   };
-  
-
 
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
     const ps = new kakao.maps.services.Places();
-    console.log('gptResponse: ', gptResponse);
     if (gptResponse && gptResponse.length) {
       gptResponse.forEach((keyword) => {
-        console.log("keyword", keyword);
         ps.keywordSearch(`제주${keyword}`, placesSearchCB);
       });
     }
-  
+
     function placesSearchCB(data, status) {
       if (status === kakao.maps.services.Status.OK) {
         setPlaces((prevPlaces) => [...prevPlaces, ...data.slice(0, 10)]);
       }
     }
-  }, [gptResponse]); 
+  }, [gptResponse]);
 
   useEffect(() => {
     if (places && places.length > 0) {
+      const x = location.state.searchData.gps
+        ? location.state.searchData.gps.longitude
+        : location.state.searchData.location.x;
+      const y = location.state.searchData.gps
+        ? location.state.searchData.gps.latitude
+        : location.state.searchData.location.y;
 
-        const x = location.state.searchData.gps ? location.state.searchData.gps.longitude : location.state.searchData.location.x;
-        const y = location.state.searchData.gps ? location.state.searchData.gps.latitude : location.state.searchData.location.y;
-
-        axios.post('http://localhost:8000/search-places',{ places, standard: {
-        x,
-        y,
-      }, type: orderList.type.length > 0 && orderList.type[0], radius: orderList.distance.length > 0 && orderList.distance[0] })
-      .then((res) => {
-        console.log("res data : ", res.data)
-
-         // "origin": {
-      //   "x": "127.13144306487084",
-      //   "y": " 37.44134209110179"
-      // },
-      // "destinations": [
-      //   {
-      //     "x": "127.14112393388389",
-      //     "y": "37.44558371517034",
-      //     "key": "0"
-      //   },
-      //   {
-      //     "x": "127.14192737519186",
-      //     "y": "37.4401766683372",
-      //     "key": "1"
-      //   }
-      // ],
-      // "radius": 5000
-
-        if (res.data) {
-
-          callKakaoMapAPI(
-            {
+      axios
+        .post("http://localhost:8000/search-places", {
+          places,
+          standard: {
+            x,
+            y,
+          },
+          type: orderList.type.length > 0 && orderList.type[0],
+          radius: orderList.distance.length > 0 && orderList.distance[0],
+        })
+        .then((res) => {
+          if (res.data) {
+            // setPositionList(res.data);
+            callKakaoMapAPI({
               origin: {
                 x,
-                y
+                y,
               },
-              destinations: 
-                res.data.reduce((acc, cur, index) => {
-                  acc.push({ x: cur.x, y: cur.y, key: index });
-                  return acc;
-                }, [])
-              ,
-              radius: 5000
-            }
-          )
-        }
-      })
-      .catch((err) => {
-        console.error('err: ', err);
-      });
-
+              destinations: res.data.reduce((acc, cur, index) => {
+                acc.push({ x: cur.x, y: cur.y, key: index });
+                return acc;
+              }, []),
+              radius: 5000,
+            });
+          }
+        })
+        .catch((err) => {
+          console.error("err: ", err);
+        });
     }
-  }, [places])
-
-
-useEffect(() => {
-  console.log('orderList: ', orderList);
-}, [orderList])
-   
-
-
+  }, [places]);
 
   const distanceButtonList = distanceList.map((item) => (
     <CheckButton
@@ -250,14 +217,10 @@ useEffect(() => {
       {distanceButtonList}
       <LabelHeader labelText="장소 및 종류" />
       <div style={{ paddingBottom: "150px" }}>{typeButtonList}</div>
-      <Link to="/dd"><Button disabled={!isButtonActive} float={true} onClickHandler={askGPT}>
+      <Button disabled={!isButtonActive} float={true} onClickHandler={askGPT}>
         완료
-      </Button></Link>
+      </Button>
       {isLoading && <Loading />}
     </Layout>
   );
 }
-
-
-
-

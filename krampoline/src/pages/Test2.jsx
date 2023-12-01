@@ -1,55 +1,47 @@
-import React, { useState } from 'react';
-import Button from '../components/Button/Button';
-import CheckButton from '../components/CheckButton/CheckButton';
-import LabelHeader from '../components/Header/LabelHeader';
-import Layout from '../components/Layout/Layout';
-import LandingPage from '../components/MapButton/LandingPage';
-import MapContainer from '../components/MapButton/MapContainer';
-import MapHeader from '../components/MapButton/MapHeader';
-import Kakao from './Kakao';
+import React, { useState } from "react";
+import Button from "../components/Button/Button";
+import CheckButton from "../components/CheckButton/CheckButton";
+import Layout from "../components/Layout/Layout";
+import MapHeader from "../components/MapButton/MapHeader";
+import Kakao from "./Kakao";
+import { useLocation } from "react-router-dom";
+import ReportButton from "../components/ReportButton/ReportButton";
+import { styled } from "styled-components";
+
+const Container = styled.div`
+  margin: 12px 0;
+  overflow: auto;
+`;
 
 const Test2 = () => {
-    const optionList = [
-        {
-          id: 1,
-          key: "",
-          value: "방문하기 어려워요.",
-        },
-        {
-          id: 2,
-          key: "거리-긴여행",
-          value: "긴 여행으로 지쳤어요..",
-        },
-      ];
-    
-      const [keywordList, setKeywordList] = useState([]);
-    
-      const selectOptionHandler = (type) => {
-        if (keywordList.includes(type)) {
-          setKeywordList(keywordList.filter((item) => item !== type));
-        } else {
-          setKeywordList([...keywordList, type]);
-        }
-      };
+  const location = useLocation();
+  const { position, data } = location.state;
 
+  const test = [
+    {
+      title: "제주 아쿠아플레닛",
+      address: "제주 서귀포시 성산읍 섭지코지로 95",
+      distance: "2.7km",
+      time: "5min",
+    },
+    {
+      title: "제주 해양 동물관",
+      address: "제주 서귀포시 성산읍 서성일로 689-32",
+      distance: "2.7km",
+      time: "5min",
+    },
+  ];
 
-      const optionButtonList = optionList.map((item) => (
-        <CheckButton
-          onClickHandler={() => {
-            selectOptionHandler(item.key);
-          }}
-        >
-          {item.value}
-        </CheckButton>
-      ));
+  const list = test.map((item) => <ReportButton data={item} />);
 
-    return (
-        <Layout>
-        <MapHeader />
-        <Kakao />
-        <Button>다시 찾기</Button>
-      </Layout>
-    );
-}
+  return (
+    <Layout>
+      <MapHeader />
+      <Kakao diarectMap={position} />
+      <Container>{list}</Container>
+      <Button>다시 찾기</Button>
+    </Layout>
+  );
+};
 
 export default Test2;
