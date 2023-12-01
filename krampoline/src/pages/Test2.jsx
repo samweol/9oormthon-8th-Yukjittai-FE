@@ -25,8 +25,8 @@ const Test2 = () => {
       time: "5min",
     },
     {
-      title: "제주 해양 동물관",
-      address: "제주 서귀포시 성산읍 서성일로 689-32",
+      title: "오름 언덕",
+      address: "제주 서귀포시 성산읍 섭지코지로 689-32",
       distance: "2.7km",
       time: "5min",
     },

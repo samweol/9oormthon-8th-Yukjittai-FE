@@ -12,43 +12,19 @@ export default function Kakao(props) {
       ), // 지도의 중심좌표
       level: 3, // 지도의 확대 레벨
     };
-    console.log("ddd", diarectMap.origin.y);
-    console.log("ddd", diarectMap.origin.x);
 
     const map = new window.kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-    const positions = [
-      {
+    const test = diarectMap.destinations.map((item) => {
+      return {
         content: "<div></div>",
-        latlng: new window.kakao.maps.LatLng(
-          diarectMap.destinations[0].y,
-          diarectMap.destinations[0].x
-        ),
-      },
-      {
-        content: "<div></div>",
-        latlng: new window.kakao.maps.LatLng(
-          diarectMap.destinations[1].y,
-          diarectMap.destinations[1].x
-        ),
-      },
-      {
-        content: "<div></div>",
-        latlng: new window.kakao.maps.LatLng(
-          diarectMap.destinations[2].y,
-          diarectMap.destinations[2].x
-        ),
-      },
-      {
-        content: "<div></div>",
-        latlng: new window.kakao.maps.LatLng(
-          diarectMap.destinations[3].y,
-          diarectMap.destinations[3].x
-        ),
-      },
-    ];
+        latlng: new window.kakao.maps.LatLng(item.y, item.x),
+      };
+    });
 
-    positions.forEach((position) => {
+    console.log(test);
+
+    test.forEach((position) => {
       const marker = new window.kakao.maps.Marker({
         map: map,
         position: position.latlng,
