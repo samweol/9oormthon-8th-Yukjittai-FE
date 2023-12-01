@@ -2,6 +2,7 @@ export const COLOR = {
   "btn-primary": "#FF8743",
   "btn-oragne-light": "#FFE8DC",
   "btn-disabled": "#D6D6D6",
+  "btn-green": "#5BAA95",
 
   "font-black": "#000000",
   "font-black-700": "#3F3F3F",

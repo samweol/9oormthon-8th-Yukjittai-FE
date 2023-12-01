@@ -7,6 +7,7 @@ import Kakao from "./Kakao";
 import { useLocation } from "react-router-dom";
 import ReportButton from "../components/ReportButton/ReportButton";
 import { styled } from "styled-components";
+import { COLOR } from "../utils/color";
 
 const Container = styled.div`
   margin: 12px 0;
@@ -39,7 +40,7 @@ const Test2 = () => {
       <MapHeader />
       <Kakao diarectMap={position} />
       <Container>{list}</Container>
-      <Button>다시 찾기</Button>
+      <Button bgColor={COLOR["btn-green"]}>다시 찾기</Button>
     </Layout>
   );
 };

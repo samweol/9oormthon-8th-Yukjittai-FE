@@ -6,7 +6,11 @@ import { FONT_SIZE } from "../../utils/fontSize";
 const ButtonStyle = styled.button`
   margin: 0 auto;
   background-color: ${(props) =>
-    props.disabled ? COLOR["btn-oragne-light"] : COLOR["btn-primary"]};
+    props.bgColor
+      ? props.bgColor
+      : props.disabled
+      ? COLOR["btn-oragne-light"]
+      : COLOR["btn-primary"]};
   border: none;
   padding: 20px 26px;
   width: 345px;
@@ -24,7 +28,11 @@ const FloatButtonStyle = styled.button`
   transform: translate(-50%);
   margin: 0 auto;
   background-color: ${(props) =>
-    props.disabled ? COLOR["btn-oragne-light"] : COLOR["btn-primary"]};
+    props.bgColor
+      ? props.bgColor
+      : props.disabled
+      ? COLOR["btn-oragne-light"]
+      : COLOR["btn-primary"]};
   border: none;
   padding: 20px 26px;
   width: 345px;
@@ -36,16 +44,24 @@ const FloatButtonStyle = styled.button`
 `;
 
 export default function Button(props) {
-  const { children, disabled, float, onClickHandler } = props;
+  const { children, disabled, float, bgColor, onClickHandler } = props;
   if (float) {
     return (
-      <FloatButtonStyle onClick={onClickHandler} disabled={disabled}>
+      <FloatButtonStyle
+        bgColor={bgColor}
+        onClick={onClickHandler}
+        disabled={disabled}
+      >
         {children}
       </FloatButtonStyle>
     );
   } else {
     return (
-      <ButtonStyle onClick={onClickHandler} disabled={disabled}>
+      <ButtonStyle
+        bgColor={bgColor}
+        onClick={onClickHandler}
+        disabled={disabled}
+      >
         {children}
       </ButtonStyle>
     );
