@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../components/Button/Button";
-import CheckButton from "../components/CheckButton/CheckButton";
 import Layout from "../components/Layout/Layout";
 import MapHeader from "../components/MapButton/MapHeader";
 import Kakao from "./Kakao";
